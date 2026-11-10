@@ -16,7 +16,7 @@ const order: State[] = ['doing', 'ready', 'waiting', 'blocked', 'done']
 const roles = ['الكل', 'المنفذ', 'المشرف', 'المعتمِد']
 const role = ref('الكل')
 
-const current = computed(() => props.data.phases.find((p) => p.status === 'doing') ?? props.data.phases[0])
+const current = computed(() => props.data.phases.find((p) => p.status === 'doing') ?? props.data.phases[0] ?? { id: 0, title: '—', weeks: '', gate: null, status: 'todo', total: 0, done: 0 })
 const all = computed(() => props.data.tasks)
 const pct = (d: number, t: number) => (t ? Math.round((d / t) * 100) : 0)
 const count = (s: State) => all.value.filter((t) => t.state === s).length
@@ -41,6 +41,9 @@ const reviewsLink = withBase('/docs/process/plan-reviews')
 
 <template>
   <div class="pb">
+    <div v-if="data.source === 'offline'" class="pb-offline">
+      تعذّر جلب التقدم من GitHub: {{ data.error }}
+    </div>
     <section class="pb-cards">
       <div class="pb-card">
         <div class="pb-k">المرحلة الحالية</div>
@@ -79,7 +82,7 @@ const reviewsLink = withBase('/docs/process/plan-reviews')
           <ul v-if="cpsOf(p.id).length" class="pb-cps">
             <li v-for="c in cpsOf(p.id)" :key="c.id" :class="['pb-cp', 'cp-' + c.state]">
               <span class="pb-diamond">◆</span>
-              <a :href="reviewsLink" class="pb-cp-id">{{ c.id }}</a>
+              <a :href="c.url" target="_blank" rel="noopener" class="pb-cp-id">{{ c.id }}</a>
               <span class="pb-cp-title">{{ c.title }}</span>
               <span :class="['pb-chip', c.state === 'due' ? 'pb-gate' : 'ghost']">{{ cpLabel[c.state] }}</span>
             </li>
@@ -102,7 +105,7 @@ const reviewsLink = withBase('/docs/process/plan-reviews')
       </h3>
       <ul v-if="g.state !== 'done' || showDone" class="pb-list">
         <li v-for="t in g.tasks" :key="t.id" class="pb-task">
-          <code class="pb-id">{{ t.id }}</code>
+          <a class="pb-id" :href="t.url" target="_blank" rel="noopener"><code>{{ t.id }}</code></a>
           <div class="pb-main">
             <div class="pb-title">{{ t.title }}</div>
             <div class="pb-meta">
@@ -122,8 +125,8 @@ const reviewsLink = withBase('/docs/process/plan-reviews')
 
     <p class="pb-src">
       آخر تحديث: {{ data.updated }} ·
-      المصدر: <template v-if="data.source === 'seed'">ملف <code>tracking/phase-0.yaml</code>، ويُنقل إلى GitHub Issues في المهمة T-009</template>
-      <template v-else>GitHub Issues</template>
+      المصدر: <a :href="'https://github.com/' + data.repo + '/issues'" target="_blank" rel="noopener">GitHub Issues</a>.
+      لتحديث الحالة: أغلق الـ Issue عند الإنجاز، أو أضف الوسم <code>status:doing</code> عند البدء.
     </p>
   </div>
 </template>
@@ -183,4 +186,6 @@ a.pb-cp-card:hover { border-color: var(--vp-c-brand-1); }
 .pb-ref { font-size: 12px; direction: ltr; unicode-bidi: isolate; }
 .pb-wait { font-size: 12px; color: var(--vp-c-warning-1); }
 .pb-src { font-size: 13px; color: var(--vp-c-text-2); margin-top: 24px; }
+.pb-offline { border: 1px solid var(--vp-c-danger-1); background: var(--vp-c-danger-soft); border-radius: 12px; padding: 12px 16px; margin-bottom: 16px; }
+a.pb-id { text-decoration: none; }
 </style>

@@ -24,7 +24,7 @@ npm install
 npm run docs:dev
 ```
 
-ثم افتح http://localhost:5173. والنسخة المنشورة على GitHub Pages تأتي في المهمة T-010.
+ثم افتح http://localhost:5173. صفحة التقدم تقرأ [GitHub Issues](https://github.com/mohammedALrabeai/intishar/issues) عبر `gh auth token` أو المتغير `GITHUB_TOKEN`. والنسخة المنشورة الخاصة تأتي في المهمة T-010.
 
 ## هيكل المستودع
 
@@ -40,8 +40,8 @@ docs/                ← حزمة المواصفات (المرجع الملزم)
   inbox.md           ← الملاحظات الجديدة، والمؤجل، والمخاطر
   spikes.md          ← تجارب تقنية تحسم المجهول قبل التسليم
   adr/               ← سجل القرارات المعمارية
+  modules/           ← مواصفات وحدات النظام (15 وحدة)
   process/           ← الأدوار، ومراجعة الخطة، وDoR وDoD، وطلب التغيير، وقالب القصة
-tracking/            ← بذرة مهام المرحلة 0 (تُنقل إلى GitHub Issues)
 reports/             ← تقارير البحث (مدخلات، ليست مواصفات ملزمة)
 research_notes/      ← ملاحظات البحث الخام ومصادرها
 .vitepress/          ← إعداد البوابة وصفحة التقدم
