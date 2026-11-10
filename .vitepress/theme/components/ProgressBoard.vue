@@ -15,6 +15,9 @@ const stateLabel: Record<State, string> = {
 const order: State[] = ['doing', 'ready', 'waiting', 'blocked', 'done']
 const roles = ['الكل', 'المنفذ', 'المشرف', 'المعتمِد']
 const role = ref('الكل')
+const mod = ref('الكل')
+const modules = computed(() => ['الكل', ...Array.from(new Set(props.data.tasks.map((t) => t.module).filter(Boolean))).sort()])
+const open = ref<Record<string, boolean>>({ doing: true, ready: true, blocked: true, waiting: false, done: false })
 
 const current = computed(() => props.data.phases.find((p) => p.status === 'doing') ?? props.data.phases[0] ?? { id: 0, title: '—', weeks: '', gate: null, status: 'todo', total: 0, done: 0 })
 const all = computed(() => props.data.tasks)
@@ -25,7 +28,7 @@ const groups = computed(() =>
   order
     .map((s) => ({
       state: s,
-      tasks: all.value.filter((t) => t.state === s && (role.value === 'الكل' || t.role === role.value)),
+      tasks: all.value.filter((t) => t.state === s && (role.value === 'الكل' || t.role === role.value) && (mod.value === 'الكل' || t.module === mod.value)),
     }))
     .filter((g) => g.tasks.length),
 )
@@ -95,15 +98,18 @@ const reviewsLink = withBase('/docs/process/plan-reviews')
     <div class="pb-filter" role="group" aria-label="تصفية حسب الدور">
       <button v-for="r in roles" :key="r" :class="{ on: role === r }" @click="role = r">{{ r }}</button>
     </div>
+    <div v-if="modules.length > 1" class="pb-filter pb-mods" role="group" aria-label="تصفية حسب الوحدة">
+      <button v-for="m in modules" :key="m" :class="{ on: mod === m }" @click="mod = m">{{ m }}</button>
+    </div>
 
     <div v-for="g in groups" :key="g.state" class="pb-group">
       <h3 :class="'st-' + g.state">
         {{ stateLabel[g.state] }} <span class="pb-count">{{ g.tasks.length }}</span>
-        <button v-if="g.state === 'done'" class="pb-toggle" @click="showDone = !showDone">
-          {{ showDone ? 'إخفاء' : 'إظهار' }}
+        <button class="pb-toggle" @click="open[g.state] = !open[g.state]">
+          {{ open[g.state] ? 'إخفاء' : 'إظهار' }}
         </button>
       </h3>
-      <ul v-if="g.state !== 'done' || showDone" class="pb-list">
+      <ul v-if="open[g.state]" class="pb-list">
         <li v-for="t in g.tasks" :key="t.id" class="pb-task">
           <a class="pb-id" :href="t.url" target="_blank" rel="noopener"><code>{{ t.id }}</code></a>
           <div class="pb-main">
@@ -170,6 +176,7 @@ a.pb-cp-card:hover { border-color: var(--vp-c-brand-1); }
 
 .pb-filter { display: flex; gap: 8px; flex-wrap: wrap; margin: 8px 0 4px; }
 .pb-filter button { border: 1px solid var(--vp-c-divider); border-radius: 99px; padding: 4px 14px; font-size: 14px; color: var(--vp-c-text-2); }
+.pb-mods button { font-size: 12px; padding: 2px 10px; direction: ltr; }
 .pb-filter button.on { background: var(--vp-c-brand-1); border-color: var(--vp-c-brand-1); color: var(--vp-c-white); }
 
 .pb-group h3 { display: flex; align-items: center; gap: 8px; }

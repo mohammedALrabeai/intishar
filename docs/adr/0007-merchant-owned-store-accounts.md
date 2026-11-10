@@ -21,3 +21,10 @@
 ## المصادر
 - [Apple App Review Guidelines 4.2.6](https://developer.apple.com/app-store/review/guidelines/)
 - [Google Play: White label apps](https://support.google.com/googleplay/android-developer/answer/15884185?hl=en)
+
+## تعديلات 2026-11-10 من مواصفات الوحدات
+
+1. **الخزنة:** مفتاح KMS لكل بيئة، ومفتاح لكل سر مربوط بـ `tenant_id`. أما مفتاح KMS لكل تاجر فمؤجل (CORE-19، Should) ([M12](../modules/M12-platform-core.md)).
+2. **المفاتيح:** مفتاح فريق في App Store Connect بدور App Manager، لأن المفاتيح الفردية لا تصل إلى endpoints التوقيع. يُتحقق من ذلك في SPK-14 ([M13](../modules/M13-build-release.md)).
+3. **حساب خدمة Play:** تنشئه المنصة لكل تاجر في مشروع GCP الخاص بالمنصة، ويضيفه التاجر في Play Console. وإن رفض التاجر، يُقبل ملف JSON من إنشائه.
+4. **معلّق على القرارات D-12 وD-13 وD-15:** الموافقة الدائمة على تحديثات النواة، ومولّد اللقطات، والمؤسسات الفردية.

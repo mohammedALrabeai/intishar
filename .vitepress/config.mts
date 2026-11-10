@@ -8,6 +8,12 @@ function h1(file: string): string {
   return m ? m[1].trim() : file
 }
 
+const modDir = join(process.cwd(), 'docs/modules')
+const modItems = readdirSync(modDir)
+  .filter((f) => /^M\d{2}-.*\.md$/.test(f))
+  .sort()
+  .map((f) => ({ text: h1(join(modDir, f)).replace(/^(M\d{2}):\s*/, '$1 · '), link: `/docs/modules/${f.replace(/\.md$/, '')}` }))
+
 const adrDir = join(process.cwd(), 'docs/adr')
 const adrItems = readdirSync(adrDir)
   .filter((f) => /^\d{4}-.*\.md$/.test(f))
@@ -56,6 +62,11 @@ export default defineConfig({
           { text: 'قرارات المنتج', link: '/docs/open-decisions' },
           { text: 'التجارب التقنية', link: '/docs/spikes' },
         ],
+      },
+      {
+        text: 'وحدات النظام',
+        collapsed: true,
+        items: [{ text: 'خريطة النظام', link: '/docs/modules/README' }, ...modItems],
       },
       {
         text: 'القرارات المعمارية',

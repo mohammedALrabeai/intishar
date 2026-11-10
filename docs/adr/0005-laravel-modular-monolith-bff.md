@@ -26,3 +26,10 @@
 ## المصادر
 - [Zid: Webhooks](https://docs.zid.sa/webhooks)، [Webhook Health](https://docs.zid.sa/webhook-health-tracking-2197281m0)
 - [Zid: Rate Limiting](https://docs.zid.sa/rate-limiting-644369m0)، [Authorization](https://docs.zid.sa/authorization)
+
+## تعديلات 2026-11-10 من مواصفات الوحدات
+
+1. **الإصدار:** Laravel 13 مع PHP 8.4، لأن دعم Laravel 12 الأمني ينتهي في 24 فبراير 2027، أي قبل الإطلاق ([M12](../modules/M12-platform-core.md)).
+2. **الوحدات بعد التفصيل:** `Platform`، و`Tenancy`، و`Commerce`، و`ZidConnector`، و`AppConfig`، و`Shoppers` (هوية المتسوق)، و`Orders`، و`Push`، و`Links`، و`Analytics`، و`Engagement`، و`Builds`، و`Onboarding`. وحدودها تحرسها اختبارات `arch()` في Pest.
+3. **حقيقتان عن زد تُضافان إلى السياق:** الـ webhook المعطّل يُسقط الأحداث المعلّقة، واستعادته تحتاج عنوانًا جديدًا. لذلك يحمل عنوان كل webhook رقم جيل، ويغطي الفجوات تصالح ليلي ([M10](../modules/M10-zid-connector.md)).
+4. **تعدد المستأجرين:** قاعدة واحدة بعمود `tenant_id`، والـ global scope يرمي خطأ إن غاب سياق المستأجر. والمستأجر يُحمل في مسار الـ API لا في ترويسة، لأن Cloudflare يتجاهل `Vary` على الترويسات المخصصة.

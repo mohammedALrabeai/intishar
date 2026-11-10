@@ -11,7 +11,7 @@ type RawStatus = 'todo' | 'doing' | 'done' | 'blocked'
 export type State = 'done' | 'doing' | 'ready' | 'waiting' | 'blocked'
 export interface Ref { label: string; link?: string }
 export interface Task {
-  id: string; phase: number; status: RawStatus; role: string; type: string; title: string; url: string
+  id: string; phase: number; status: RawStatus; role: string; type: string; title: string; url: string; module: string
   refs: Ref[]; depends: string[]; waitingOn: string[]; state: State
 }
 export interface Phase { id: number; title: string; weeks: string; gate: string | null; status: RawStatus; total: number; done: number }
@@ -51,6 +51,7 @@ async function gh(repo: string, token: string, path: string): Promise<any[]> {
   return out
 }
 
+let modFiles: string[] = []
 function refLink(r: string, adrFiles: string[]): Ref {
   if (/^D-\d+/.test(r)) return { label: r, link: '/docs/open-decisions' }
   if (/^(SPK|P-)/.test(r)) return { label: r, link: '/docs/spikes' }
@@ -60,7 +61,10 @@ function refLink(r: string, adrFiles: string[]): Ref {
     return { label: r, link: f ? `/docs/adr/${f.replace(/\.md$/, '')}` : '/docs/adr/README' }
   }
   const mod = r.match(/^M(\d{2})$/)
-  if (mod) return { label: r, link: '/docs/modules/README' }
+  if (mod) {
+    const f = modFiles.find((x) => x.startsWith(r + '-'))
+    return { label: r, link: f ? `/docs/modules/${f.replace(/\.md$/, '')}` : '/docs/modules/README' }
+  }
   if (r === 'PRD') return { label: r, link: '/docs/01-prd' }
   if (/^G\d/.test(r)) return { label: r, link: '/docs/roadmap' }
   return { label: r }
@@ -88,6 +92,7 @@ export default defineLoader({
         gh(repo, token, '/issues?state=all'),
       ])
       const adrFiles = readdirSync(resolve(root, 'docs/adr'))
+      modFiles = readdirSync(resolve(root, 'docs/modules'))
       const phaseOf = new Map<number, number>()
       const rawPhases = milestones
         .map((m) => {
@@ -114,7 +119,7 @@ export default defineLoader({
         return {
           id: m ? m[1] : `#${i.number}`, title: m ? m[2] : i.title, url: i.html_url, status,
           phase: i.milestone ? phaseOf.get(i.milestone.number) ?? -1 : -1,
-          role: labelValue(labels, 'role:') || '—', type: labelValue(labels, 'type:') || '—',
+          role: labelValue(labels, 'role:') || '—', type: labelValue(labels, 'type:') || '—', module: labelValue(labels, 'module:'),
           kind: labels.some((l: any) => l.name === 'gate') ? 'gate' : labels.some((l: any) => l.name === 'checkpoint') ? 'checkpoint' : null,
           body: i.body || '',
         }
@@ -129,7 +134,7 @@ export default defineLoader({
         const state: State = r.status === 'done' ? 'done' : r.status === 'doing' ? 'doing'
           : r.status === 'blocked' ? 'blocked' : waitingOn.length ? 'waiting' : 'ready'
         return {
-          id: r.id, phase: r.phase, status: r.status, role: r.role, type: r.type, title: r.title, url: r.url,
+          id: r.id, phase: r.phase, status: r.status, role: r.role, type: r.type, title: r.title, url: r.url, module: r.module,
           refs: list(r.body, 'المراجع').map((x) => refLink(x, adrFiles)), depends, waitingOn, state,
         }
       }).sort(sortId)

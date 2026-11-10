@@ -28,3 +28,10 @@
 - [Zalando Engineering: Appcraft](https://engineering.zalando.com/posts/2024/05/appcraft.html)
 - [pub.dev/rfw](https://pub.dev/packages/rfw)، [pub.dev/stac](https://pub.dev/packages/stac)
 - `research_notes/مزايا وتخصيص تطبيقات متاجر زد/flutter_configurable_architecture.md`
+
+## تعديلات 2026-11-10 من مواصفات الوحدات
+
+1. **مكان مخططات الكتل:** المصدر الوحيد هو `06-api/blocks/`. وتستهلكه مستودعات الكود كـ git submodule مثبّت على tag. يُتحقق منه في PHP بـ opis/json-schema وفي TypeScript بـ Ajv، وتُولَّد أنواع TypeScript، أما نماذج Dart فتُكتب يدويًا وتحرسها اختبارات العقد ([M03](../modules/M03-blocks-pages.md)).
+2. **صيغتان للصفحة:** صيغة تحرير تحفظها اللوحة، وصيغة تسليم يرسمها التطبيق، وهي مترجمة ومعبأة بالبيانات.
+3. **الأفعال:** `add_to_cart` و`apply_coupon` متاحان للكتل فقط، ولا تستدعيهما الروابط الخارجية ولا الإشعارات ([M07](../modules/M07-deep-links.md)).
+4. **إعداد الشاشات الأصلية:** وثيقة `shell` واحدة تضم وحدات صفحة المنتج، ونمط البطاقة، والشريط السفلي، والشريط العلوي.

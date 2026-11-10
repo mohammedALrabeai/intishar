@@ -30,3 +30,12 @@
 - [Zid: View Order](https://docs.zid.sa/view-order-12479054e0)
 - [Tabby: integration without SDK](https://docs.tabby.ai/pay-in-4-custom-integration/mobile-apps/integration-without-sdk)
 - `research_notes/مزايا وتخصيص تطبيقات متاجر زد/zid_feature_capability_map.md`
+
+## تعديلات 2026-11-10 من مواصفات الوحدات
+
+هذه التعديلات مقترحة، وتنتظر الاعتماد مع بقية القرار.
+
+1. **قائمة صريحة بالاستدعاءات الممنوعة على صفحة الدفع.** في `webview_flutter_wkwebview`، كل من `addJavaScriptChannel` و`runJavaScript` و`enableZoom(false)` و`setOnConsoleMessage` يحقن سكربتًا في الصفحة، فيعطّل Apple Pay. فالمسموح على صفحة الدفع: الـ cookies، والترويسة، و`NavigationDelegate` فقط ([M04](../modules/M04-shopping-flows.md)).
+2. **الطبقة الثالثة لكشف النجاح** لا تمر عبر قناة JavaScript. سكربت تطبيقات زد (App Script) يرسل الإشارة إلى خادمنا بـ `sendBeacon`، أو ينتقل إلى رابط بمخطط التطبيق يلتقطه `NavigationDelegate` ([M04](../modules/M04-shopping-flows.md)، و[M08](../modules/M08-analytics.md)).
+3. **هوية المتسوق في الخادم:** يُرسل cookie جلسة زد إلى خادمنا مرة واحدة، فيتحقق منه بـ `GET account`، ثم يصدر رمز متسوق موقّعًا مدته 24 ساعة. هذا الرمز يُستخدم للتحقق من ملكية الطلب، ولربط الجهاز بالعميل في الإشعارات. وهو قرار أمني ينتظر الاعتماد ([M05](../modules/M05-account-orders.md)).
+4. **تابي توصي حاليًا بمتصفح النظام.** نُبقي WebView لأن متصفح النظام يفقد cookies الجلسة. يُتابع في SPK-01.

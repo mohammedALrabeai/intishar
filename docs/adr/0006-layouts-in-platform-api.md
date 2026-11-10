@@ -23,3 +23,9 @@ Firebase Remote Config محدود بمليون حرف و3,000 معامل لكل 
 ## المصادر
 - [Firebase Remote Config limits](https://firebase.google.com/docs/remote-config/parameters)، [Firebase FAQ](https://firebase.google.com/support/faq)
 - [Shorebird FAQ](https://docs.shorebird.dev/code-push/faq/)
+
+## تعديلات 2026-11-10 من مواصفات الوحدات
+
+1. **معنى `schema_version`:** رقم مراجعة حزمة العقود كلها. فالتحقق من `min_app_version` لكل كتلة يتم على الجهاز، و`X-Supported-Blocks` للتحقق من الاتساق فقط ([M03](../modules/M03-blocks-pages.md)، و[M11](../modules/M11-app-config-service.md)).
+2. **CDN:** يُستخدم ETag مع cache tags في Cloudflare، ويُطهَّر عند النشر. ولا يُستخدم `s-maxage`، لأن Cloudflare يعامله كـ `proxy-revalidate` فيعطّل تقديم النسخة القديمة أثناء إعادة التحقق.
+3. **اللقطة المضمّنة:** لقطة واحدة تجمع الأعلام والهوية والـ shell والرئيسية لكل لغة مدعومة، وتُبنى وقت البناء ([M01](../modules/M01-app-foundation.md)، و[M13](../modules/M13-build-release.md)).

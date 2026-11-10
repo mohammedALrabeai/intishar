@@ -29,3 +29,8 @@
 - [shadcn/ui](https://ui.shadcn.com/)، [Radix Direction Provider](https://www.radix-ui.com/primitives/docs/utilities/direction-provider)
 - [Laravel Sanctum: SPA authentication](https://laravel.com/docs/sanctum#spa-authentication)
 - [dnd-kit](https://dndkit.com/)
+
+## تعديلات 2026-11-10 من مواصفات الوحدات
+
+1. **استثناء تشغيلي:** لوحة Horizon مبنية بـ Blade وVue. تُتاح لفريق المنصة فقط خلف مصادقة الإدارة، كاستثناء داخلي من «لا Blade»، ولا يراها التاجر. أما Pulse فمرفوض لأنه مبني على Livewire ([M12](../modules/M12-platform-core.md)).
+2. **تسجيل دخول التاجر:** معلّق على D-11.
