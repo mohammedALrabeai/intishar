@@ -10,7 +10,7 @@
 |---|---|
 | المعتمِد | [قرارات المنتج](docs/open-decisions.md)، ثم [وثيقة المنتج PRD](docs/01-prd.md) |
 | المشرف | [التقدم](docs/progress.md)، و[خارطة الطريق](docs/roadmap.md)، و[فهرس الوثائق](docs/README.md) |
-| المنفذ | [فهرس الوثائق](docs/README.md)، ثم [سجل القرارات المعمارية](docs/adr/README.md) |
+| المنفذ | [ابدأ هنا: دليل المنفذ](docs/start-here.md) |
 
 ## بوابة المشروع
 

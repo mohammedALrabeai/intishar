@@ -40,6 +40,7 @@ export default defineConfig({
   ],
   themeConfig: {
     nav: [
+      { text: 'ابدأ هنا', link: '/docs/start-here' },
       { text: 'التقدم', link: '/docs/progress' },
       { text: 'خارطة الطريق', link: '/docs/roadmap' },
       { text: 'PRD', link: '/docs/01-prd' },
@@ -49,6 +50,7 @@ export default defineConfig({
       {
         text: 'البداية',
         items: [
+          { text: 'ابدأ هنا: دليل المنفذ', link: '/docs/start-here' },
           { text: 'التقدم والجدول الزمني', link: '/docs/progress' },
           { text: 'خارطة الطريق', link: '/docs/roadmap' },
           { text: 'الملاحظات والمخاطر', link: '/docs/inbox' },
