@@ -24,7 +24,7 @@ npm install
 npm run docs:dev
 ```
 
-ثم افتح http://localhost:5173. صفحة التقدم تقرأ [GitHub Issues](https://github.com/mohammedALrabeai/intishar/issues) عبر `gh auth token` أو المتغير `GITHUB_TOKEN`. والنسخة المنشورة الخاصة تأتي في المهمة T-010.
+ثم افتح http://localhost:5173. صفحة التقدم تقرأ [GitHub Issues](https://github.com/mohammedALrabeai/intishar/issues) عبر `gh auth token` أو المتغير `GITHUB_TOKEN`. والنسخة المنشورة على **https://mohammedalrabeai.github.io/intishar/**، وتتحدث تلقائيًا عند كل push وكل تغيير في المهام وكل ساعة.
 
 ## هيكل المستودع
 
