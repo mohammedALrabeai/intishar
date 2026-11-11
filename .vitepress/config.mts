@@ -52,6 +52,7 @@ export default defineConfig({
         text: 'البداية',
         items: [
           { text: 'ابدأ هنا: دليل المنفذ', link: '/docs/start-here' },
+          { text: 'أسئلة بانتظار الإجابة', link: '/docs/open-questions' },
           { text: 'التقدم والجدول الزمني', link: '/docs/progress' },
           { text: 'النموذج التفاعلي ↗', link: '/prototype/index.html', target: '_blank' },
           { text: 'خارطة الطريق', link: '/docs/roadmap' },

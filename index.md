@@ -37,3 +37,15 @@ features:
     link: /docs/process/roles
     linkText: الأدوار والعملية
 ---
+
+<div style="max-width:1152px;margin:48px auto 0;padding:0 24px">
+
+## إن كنت المنفذ، فابدأ من هنا
+
+1. اقرأ **[دليل المنفذ](/docs/start-here)** كاملًا. فيه خطواتك الأولى، وأهم القواعد، وطريقة العمل اليومية.
+2. جرّب **[النموذج التفاعلي](https://mohammedalrabeai.github.io/intishar/prototype/index.html)** لترى شكل التطبيق ومحرر التاجر.
+3. ابدأ أول مهمة: **[T-040: مراجعة المواصفات وتقدير القصص](https://github.com/mohammedALrabeai/intishar/issues/297)**. المطلوب فيها القراءة والسؤال والتقدير، لا كتابة الكود.
+
+ما زالت هناك أسئلة مفتوحة، وجمعناها في **[أسئلة بانتظار الإجابة](/docs/open-questions)**. لا تفترض إجابتها، واسأل في تعليق على المهمة.
+
+</div>

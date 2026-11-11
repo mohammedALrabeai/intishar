@@ -14,5 +14,14 @@
 /* العربية لا تقبل التباعد بين الحروف */
 .vp-doc, .VPHero, .VPFeatures, .VPSidebar { letter-spacing: 0; }
 .vp-doc p, .vp-doc li { line-height: 1.9; }
-.vp-doc table { display: table; width: 100%; }
+@media (min-width: 960px) { .vp-doc table { display: table; width: 100%; } }
 .vp-doc code { direction: ltr; unicode-bidi: isolate; }
+
+/* عناوين تنبيهات GitHub بالعربية */
+.vp-doc .custom-block.github-alert .custom-block-title { font-size: 0; }
+.vp-doc .custom-block.github-alert .custom-block-title::before { font-size: 14px; }
+.vp-doc .custom-block.github-alert.note .custom-block-title::before { content: 'ملاحظة'; }
+.vp-doc .custom-block.github-alert.tip .custom-block-title::before { content: 'نصيحة'; }
+.vp-doc .custom-block.github-alert.important .custom-block-title::before { content: 'مهم'; }
+.vp-doc .custom-block.github-alert.warning .custom-block-title::before { content: 'تنبيه'; }
+.vp-doc .custom-block.github-alert.caution .custom-block-title::before { content: 'انتبه'; }
