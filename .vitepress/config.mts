@@ -42,6 +42,7 @@ export default defineConfig({
     nav: [
       { text: 'ابدأ هنا', link: '/docs/start-here' },
       { text: 'التقدم', link: '/docs/progress' },
+      { text: 'النموذج التفاعلي', link: '/prototype/index.html', target: '_blank' },
       { text: 'خارطة الطريق', link: '/docs/roadmap' },
       { text: 'PRD', link: '/docs/01-prd' },
       { text: 'القرارات', link: '/docs/adr/README' },
@@ -52,6 +53,7 @@ export default defineConfig({
         items: [
           { text: 'ابدأ هنا: دليل المنفذ', link: '/docs/start-here' },
           { text: 'التقدم والجدول الزمني', link: '/docs/progress' },
+          { text: 'النموذج التفاعلي ↗', link: '/prototype/index.html', target: '_blank' },
           { text: 'خارطة الطريق', link: '/docs/roadmap' },
           { text: 'الملاحظات والمخاطر', link: '/docs/inbox' },
           { text: 'فهرس الوثائق', link: '/docs/README' },

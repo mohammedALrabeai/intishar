@@ -20,6 +20,7 @@
 | البوابة، وهي هذا الموقع | https://mohammedalrabeai.github.io/intishar/ |
 | المهام | https://github.com/mohammedALrabeai/intishar/issues |
 | المستودع | https://github.com/mohammedALrabeai/intishar |
+| النموذج التفاعلي: شكل التطبيق ومحرر التاجر | https://mohammedalrabeai.github.io/intishar/prototype/index.html |
 
 ## القاعدة الأولى
 
@@ -42,6 +43,7 @@
 3. [القرارات المعمارية](adr/README.md): لماذا بُني كل شيء بهذه الطريقة. لا تخالفها. وإن رأيت فيها خطأ فاكتبه في تعليق.
 4. [متطلبات المنتج PRD](01-prd.md): ماذا نبني ولمن.
 5. [التجارب التقنية](spikes.md): ما زال مجهولًا، والقصص التي تنتظره.
+6. **النموذج التفاعلي** (https://mohammedalrabeai.github.io/intishar/prototype/index.html): المرجع البصري المؤقت للشاشات وتجربة المحرر حتى يُحسم مصدر التصميم (D-08). وإن اختلف النموذج مع المواصفة، فالمواصفة هي المرجع.
 
 ## كيف تعرف ماذا تعمل الآن؟
 
